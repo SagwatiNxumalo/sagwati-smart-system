@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sagwati Smart Grocery System</title>
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
 </head>
 <body>
 
@@ -25,29 +26,54 @@
     </div>
   </div>
 
+  <!-- GPS LOCATION BAR -->
+  <div class="gps-bar">
+    <div class="gps-left">
+      <div class="gps-dot"></div>
+      <i class="ti ti-map-pin"></i>
+      <span>Your location: Parow, Cape Town &nbsp;·&nbsp; GPS active</span>
+    </div>
+    <span class="gps-change">Change location</span>
+  </div>
+
   <!-- MAIN CONTENT AREA -->
   <div class="main">
 
-    <!-- SIDEBAR FILTERS -->
+    <!-- LEFT SIDEBAR -->
     <div class="sidebar">
 
       <!-- Location Filter -->
       <div class="filter-group">
         <div class="sidebar-label">Location</div>
-        <div class="filter-row sel">All areas <span class="badge">5</span></div>
+        <div class="filter-row sel">Near me <span class="badge">5</span></div>
         <div class="filter-row">Parow <span class="badge">2</span></div>
         <div class="filter-row">Bellville <span class="badge">1</span></div>
         <div class="filter-row">Belhar <span class="badge">1</span></div>
         <div class="filter-row">Kuilsriver <span class="badge">1</span></div>
       </div>
 
+      <!-- Search Radius Slider -->
+      <div class="filter-group">
+        <div class="sidebar-label">Search radius</div>
+        <div class="radius-row">
+          <i class="ti ti-map-pin"></i>
+          <input type="range" min="1" max="20" value="10" id="radiusSlider">
+          <span class="radius-val" id="radiusVal">10km</span>
+        </div>
+      </div>
+
+      <!-- Travel Mode -->
+      <div class="filter-group">
+        <div class="sidebar-label">Travel mode</div>
+        <div class="filter-row sel"><i class="ti ti-walk"></i>&nbsp; Walking</div>
+        <div class="filter-row"><i class="ti ti-car"></i>&nbsp; Driving</div>
+      </div>
+
       <!-- Day Filter -->
       <div class="filter-group">
         <div class="sidebar-label">Day</div>
-        <div class="filter-row">Monday</div>
-        <div class="filter-row">Tuesday</div>
         <div class="filter-row sel">Wednesday</div>
-        <div class="filter-row">Thursday</div>
+        <div class="filter-row">Monday</div>
         <div class="filter-row">Friday</div>
       </div>
 
@@ -61,15 +87,12 @@
 
     </div>
 
-    <!-- RIGHT SIDE CONTENT -->
+    <!-- RIGHT CONTENT AREA -->
     <div class="content">
 
       <!-- SEARCH BAR -->
       <div class="search-bar">
-        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
-          <circle cx="6.5" cy="6.5" r="4"/>
-          <path d="M10 10l3 3"/>
-        </svg>
+        <i class="ti ti-search"></i>
         <span class="search-placeholder">White bread 700g</span>
         <button class="search-btn">Search</button>
       </div>
@@ -83,99 +106,106 @@
         <span class="chip">Canned Goods</span>
       </div>
 
-      <!-- PRICE COMPARISON RESULTS -->
+      <!-- PRICE COMPARISON CARDS -->
       <div>
-        <div class="section-title">Price comparison — white bread 700g (Wednesday)</div>
+        <div class="section-title">Price comparison — white bread 700g · sorted by distance from you</div>
         <div class="results-grid">
 
           <!-- Checkers Hyper -->
-          <div class="result-card cheapest">
-            <div class="best-badge">Cheapest</div>
-            <div class="store-row">
-              <div class="store-dot" style="background:#1D9E75"></div>
-              <div>
-                <div class="store-name">Checkers Hyper</div>
-                <div class="store-loc">Parow</div>
-              </div>
-            </div>
+          <div class="result-card best-all">
+            <span class="top-badge badge-best">Best pick</span>
+            <div class="store-name"><span class="store-dot" style="background:#1D9E75"></span>Checkers Hyper</div>
+            <div class="store-loc">Parow</div>
             <div class="price">R15.99</div>
-          </div>
-
-          <!-- Pick n Pay -->
-          <div class="result-card">
-            <div class="store-row">
-              <div class="store-dot" style="background:#378ADD"></div>
-              <div>
-                <div class="store-name">Pick n Pay</div>
-                <div class="store-loc">Parow</div>
-              </div>
+            <div class="dist-row">
+              <i class="ti ti-walk dist-icon"></i>
+              <span class="dist-text">0.3 km</span>
+              <span class="dist-time">2 min walk</span>
             </div>
-            <div class="price">R16.99</div>
           </div>
 
           <!-- Shoprite -->
           <div class="result-card">
-            <div class="sale-badge">On sale</div>
-            <div class="store-row">
-              <div class="store-dot" style="background:#D85A30"></div>
-              <div>
-                <div class="store-name">Shoprite</div>
-                <div class="store-loc">Bellville</div>
-              </div>
-            </div>
+            <span class="top-badge badge-sale">On sale</span>
+            <div class="store-name"><span class="store-dot" style="background:#D85A30"></span>Shoprite</div>
+            <div class="store-loc">Bellville</div>
             <div class="price">R15.99</div>
             <div class="old-price">R17.49</div>
+            <div class="dist-row">
+              <i class="ti ti-car dist-icon"></i>
+              <span class="dist-text">3.1 km</span>
+              <span class="dist-time far">8 min drive</span>
+            </div>
+          </div>
+
+          <!-- Pick n Pay -->
+          <div class="result-card">
+            <div class="store-name"><span class="store-dot" style="background:#378ADD"></span>Pick n Pay</div>
+            <div class="store-loc">Parow</div>
+            <div class="price">R16.99</div>
+            <div class="dist-row">
+              <i class="ti ti-walk dist-icon"></i>
+              <span class="dist-text">1.8 km</span>
+              <span class="dist-time far">20 min walk</span>
+            </div>
           </div>
 
           <!-- Spar -->
           <div class="result-card">
-            <div class="store-row">
-              <div class="store-dot" style="background:#7F77DD"></div>
-              <div>
-                <div class="store-name">Spar</div>
-                <div class="store-loc">Belhar</div>
-              </div>
-            </div>
+            <div class="store-name"><span class="store-dot" style="background:#7F77DD"></span>Spar</div>
+            <div class="store-loc">Belhar</div>
             <div class="price">R18.49</div>
+            <div class="dist-row">
+              <i class="ti ti-car dist-icon"></i>
+              <span class="dist-text">5.4 km</span>
+              <span class="dist-time far">12 min drive</span>
+            </div>
           </div>
 
           <!-- Woolworths -->
           <div class="result-card">
-            <div class="store-row">
-              <div class="store-dot" style="background:#D4537E"></div>
-              <div>
-                <div class="store-name">Woolworths</div>
-                <div class="store-loc">Kuilsriver</div>
-              </div>
-            </div>
+            <div class="store-name"><span class="store-dot" style="background:#D4537E"></span>Woolworths</div>
+            <div class="store-loc">Kuilsriver</div>
             <div class="price">R22.99</div>
+            <div class="dist-row">
+              <i class="ti ti-car dist-icon"></i>
+              <span class="dist-text">7.2 km</span>
+              <span class="dist-time far">15 min drive</span>
+            </div>
           </div>
 
         </div>
       </div>
 
-      <!-- AI RECOMMENDATION -->
-      <div class="ai-card">
-        <div class="ai-icon">
-          <svg viewBox="0 0 16 16" fill="none" stroke="#1D9E75" stroke-width="1.5">
-            <circle cx="8" cy="8" r="6"/>
-            <path d="M6 8h4M8 6v4"/>
-          </svg>
-        </div>
-        <div>
-          <div class="ai-title">AI recommendation</div>
-          <div class="ai-text">
-            Checkers Hyper in Parow and Shoprite Bellville are both at R15.99 today
-            — the cheapest options. Shoprite has it on promotion, which may not last,
-            so Checkers Hyper is the more reliable choice. Prices for this item tend
-            to be lowest on Wednesdays across stores.
+      <!-- AI RECOMMENDATION + MAP -->
+      <div class="rec-row">
+
+        <div class="ai-card">
+          <div class="ai-icon">AI</div>
+          <div>
+            <div class="ai-title">AI recommendation</div>
+            <div class="ai-text">
+              Checkers Hyper is your best option — it has the lowest price at R15.99
+              and is only a 2 minute walk from your current location. Shoprite Bellville
+              matches the price but requires an 8 minute drive. Save the trip and walk
+              to Checkers Hyper today.
+            </div>
           </div>
         </div>
+
+        <div class="map-card">
+          <div class="section-title">Nearby stores</div>
+          <div class="map-placeholder">
+            <i class="ti ti-map"></i>
+            <span class="map-label">Google Maps view</span>
+          </div>
+        </div>
+
       </div>
 
       <!-- PRICE TREND CHART -->
       <div class="trend-card">
-        <div class="section-title">7-day price trend — Checkers Hyper</div>
+        <div class="section-title">7-day price trend — Checkers Hyper (closest store)</div>
         <div class="trend-bars">
           <div class="bar-col">
             <div class="bar-price">R17</div>
@@ -218,6 +248,16 @@
     </div>
   </div>
 </div>
+
+<script>
+  const slider = document.getElementById('radiusSlider');
+  const val = document.getElementById('radiusVal');
+  if (slider) {
+    slider.addEventListener('input', function () {
+      val.textContent = slider.value + 'km';
+    });
+  }
+</script>
 
 </body>
 </html>
